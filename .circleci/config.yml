@@ -1,0 +1,20 @@
+version: 2.1
+jobs:
+    build:
+        working_directory: ~/mdn-scraper
+        docker:
+            - image: circleci/node:14.15.4
+        steps:
+            - checkout
+            - restore_cache:
+                  key: dependency-cache-{{ checksum "yarn.lock" }}
+            - run:
+                  name: Install Dependencies
+                  command: yarn
+            - save_cache:
+                  key: dependency-cache-{{ checksum "yarn.lock" }}
+                  paths:
+                      - ./node_modules
+            - run:
+                  name: Build Project
+                  command: yarn build
