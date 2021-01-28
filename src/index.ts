@@ -46,7 +46,7 @@ function htmlToMarkdown(text: string) {
             .replace(/<code>|<\/code>/g, "`")
             .replace(/<em>|<\/em>/g, "*")
             .replace(/<sup>/g, "^")
-            .replace(/<var>|<\/var>|<p>|<\/p>|<\/sup>|<span>|<\/span>|<span class="seoSummary">|\n|'\n'/g, "")
+            .replace(/<var>|<\/var>|<p>|<\/p>|<\/sup>|<span>|<\/span>|<span class="seoSummary">|<div>|<\/div>|\n|'\n'/g, "")
             .replace(/\|/g, "\u200b|")
             .trim(),
         { level: "all" }
@@ -107,21 +107,11 @@ export default async function search(query: string) {
     });
     let response = "";
 
-    if (hit && elements.some(el => el.name.toLowerCase().includes(keyword))) {
+    if (hit) {
         response = `${domains.reference}/${hit.type}/${args.join("/")}`;
-    } else if (hit) {
-        response = hit.url;
     } else {
         response = relevant.url;
     }
-
-    if (response) {
-        try {
-            await axios.get(response);
-        } catch {
-            response = relevant.url;
-        }
-    }
-
+    
     return await parseData(response);
 }

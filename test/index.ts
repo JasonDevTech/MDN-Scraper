@@ -10,9 +10,11 @@ import search from "../src/index";
         "Array.join",
         "Array#join()",
         "Array#join",
+        "String#replace",
     ];
 
     const miscellaneous = [
+        "number",
         "template literals",
         "array",
         "string",
@@ -30,7 +32,7 @@ import search from "../src/index";
         "split",
         "logical or",
         "logical and",
-        "nullish"
+        "nullish",
     ];
 
     for (const userInput of [...objectMembers, ...miscellaneous]) {
