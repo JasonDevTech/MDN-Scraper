@@ -67,28 +67,34 @@ function getHyperLinks(text: string) {
     return text;
 }
 
-async function parseData(link: string): Promise<Result> {
-    const { data } = await axios.get(link, {
-        headers: {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+async function parseData(link: string): Promise<Result | { error: string; }> {
+    try {
+        const { data } = await axios.get(link, {
+            headers: {
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+            }
+        });
+        const result = parse(data as string, { blockTextElements: { pre: true } });
+        const url = result.querySelector("link[rel='canonical']").attributes.href;
+        const title = decode(result.querySelector(".title").innerText, { level: "all" });
+        let text = "";
+
+        for (let i = 2; i <= 4; i++) {
+            text = result.querySelector("#content .article").childNodes[0].childNodes[i].toString();
+
+            if (text !== "\n\n") break;
         }
-    });
-    const result = parse(data as string, { blockTextElements: { pre: true } });
-    const url = result.querySelector("link[rel='canonical']").attributes.href;
-    const title = decode(result.querySelector(".title").innerText, { level: "all" });
-    let text = "";
 
-    for (let i = 2; i <= 4; i++) {
-        text = result.querySelector("#content .article").childNodes[0].childNodes[i].toString();
-
-        if (text !== "\n\n") break;
-    }
-
-    return {
-        title,
-        url,
-        parsed: getHyperLinks(htmlToMarkdown(text)).replace(/ +(?= )/g, ""),
-        raw: text,
+        return {
+            title,
+            url,
+            parsed: getHyperLinks(htmlToMarkdown(text)).replace(/ +(?= )/g, ""),
+            raw: text,
+        }
+    } catch (error) {
+        return {
+            error: error.response.statusText,
+        };
     }
 }
 

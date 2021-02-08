@@ -11,6 +11,7 @@ import search from "../src/index";
         "Array#join()",
         "Array#join",
         "String#replace",
+        "String.format",
     ];
 
     const miscellaneous = [

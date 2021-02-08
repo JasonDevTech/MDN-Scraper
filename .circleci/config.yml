@@ -4,6 +4,7 @@ jobs:
         working_directory: ~/mdn-scraper
         docker:
             - image: circleci/node:14.15.4
+        resource_class: small
         steps:
             - checkout
             - restore_cache:
