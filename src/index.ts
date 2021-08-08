@@ -76,13 +76,15 @@ async function parseData(link: string): Promise<Result | { error: string; }> {
         });
         const result = parse(data as string, { blockTextElements: { pre: true } });
         const url = result.querySelector("link[rel='canonical']").attributes.href;
-        const title = decode(result.querySelector(".title").innerText, { level: "all" });
+        const title = decode(result.querySelector(".main-page-content > h1").innerText, { level: "all" });
         let text = "";
 
-        for (let i = 2; i <= 4; i++) {
-            text = result.querySelector("#content .article").childNodes[0].childNodes[i].toString();
+        for (let i = 0; i <= 4; i++) {
+            text = result.querySelector(".main-page-content").childNodes[1].childNodes[i].toString();
 
-            if (text !== "\n\n") break;
+            // "<blockquote></blockquote>".length is 25
+            // If tag is not empty, break.
+            if (text.length > 25) break;
         }
 
         return {
@@ -118,6 +120,6 @@ export default async function search(query: string) {
     } else {
         response = relevant.url;
     }
-    
+
     return await parseData(response);
 }
