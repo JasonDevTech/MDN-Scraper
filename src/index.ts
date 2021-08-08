@@ -76,7 +76,7 @@ async function parseData(link: string): Promise<Result | { error: string; }> {
         });
         const result = parse(data as string, { blockTextElements: { pre: true } });
         const url = result.querySelector("link[rel='canonical']").attributes.href;
-        const title = decode(result.querySelector(".main-page-content>h1").innerText, { level: "all" });
+        const title = decode(result.querySelector(".main-page-content > h1").innerText, { level: "all" });
         let text = "";
 
         for (let i = 0; i <= 4; i++) {
