@@ -1,36 +1,12 @@
 {
     "name": "mdn-scraper",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Query the MDN website with a search term.",
     "main": "./dist/src/index.js",
     "types": "./dist/src/index.d.ts",
     "files": [
         "dist/"
     ],
-    "directories": {
-        "test": "test"
-    },
-    "dependencies": {
-        "axios": "^0.21.1",
-        "html-entities": "^2.3.2",
-        "match-sorter": "^6.3.0",
-        "node-html-parser": "^4.1.3"
-    },
-    "devDependencies": {
-        "ts-node": "^10.1.0",
-        "typescript": "^4.3.5"
-    },
-    "scripts": {
-        "build": "node_modules/.bin/tsc",
-        "deploy": "npm run build && npm run start",
-        "dev": "ts-node src/index.ts",
-        "start": "node ./dist/src/index.js",
-        "test": "ts-node test/index.ts",
-        "prepare": "npm run build"
-    },
-    "engines": {
-        "node": ">=8.0.0"
-    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/SemperFortis/MDN-Scraper.git"
@@ -41,7 +17,7 @@
         "mdn-scraper",
         "scraper"
     ],
-    "author": "Jason",
+    "author": "SemperFortis",
     "contributors": [
         "Shane4368"
     ],
@@ -49,5 +25,52 @@
     "bugs": {
         "url": "https://github.com/SemperFortis/MDN-Scraper/issues"
     },
-    "homepage": "https://github.com/SemperFortis/MDN-Scraper/#readme"
+    "homepage": "https://github.com/SemperFortis/MDN-Scraper/#readme",
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "scripts": {
+        "build": "tsc",
+        "deploy": "npm run build && npm run start",
+        "dev": "ts-node src/index.ts",
+        "eslint": "eslint --fix . --ext ts",
+        "start": "node ./dist/src/index.js",
+        "test": "jest",
+        "watch": "tsc -w",
+        "prepare": "npm run build",
+        "prettier": "prettier --write .",
+        "commit": "cz"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "html-entities": "^2.3.2",
+        "match-sorter": "^6.3.0",
+        "node-html-parser": "^4.1.3",
+        "typescript": "^4.3.5"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.14.8",
+        "@babel/preset-env": "^7.14.8",
+        "@babel/preset-typescript": "^7.14.5",
+        "@commitlint/config-conventional": "^13.1.0",
+        "@types/jest": "^26.0.24",
+        "@typescript-eslint/eslint-plugin": "^4.28.5",
+        "@typescript-eslint/parser": "^4.28.5",
+        "babel-jest": "^27.0.6",
+        "commitlint": "^13.1.0",
+        "cz-conventional-changelog": "3.3.0",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.23.4",
+        "eslint-plugin-prettier": "^3.4.0",
+        "husky": "^7.0.1",
+        "jest": "^27.0.6",
+        "prettier": "^2.3.2",
+        "ts-node": "^10.1.0"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
 }
