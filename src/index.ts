@@ -2,7 +2,7 @@ import axios from 'axios';
 import { parse, HTMLElement } from 'node-html-parser';
 import { decode } from 'html-entities';
 import { matchSorter, rankings } from 'match-sorter';
-import { Result, Hit } from '../typings';
+import { Result, Hit } from './types';
 
 const domains = {
     base: 'https://developer.mozilla.org',
