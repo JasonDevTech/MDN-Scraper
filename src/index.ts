@@ -153,3 +153,5 @@ export default async function search(query: string) {
 
     return await parseData(response);
 }
+
+export { Result };
