@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-    build:
+    production:
         docker:
             - image: circleci/node:14.15.4
         steps:
@@ -9,12 +9,20 @@ jobs:
                   key: dependency-cache-{{ checksum "yarn.lock" }}
             - run:
                   name: Install dependencies
-                  command: yarn install --production=true --cache-folder ~/.cache/yarn
+                  command: yarn install --cache-folder ~/.cache/yarn
             - save_cache:
                   key: dependency-cache-{{ checksum "yarn.lock" }}
                   paths:
                       - ./node_modules
                       - ~/.cache/yarn
             - run:
+                  name: Run tests
+                  command: yarn test
+            - run:
                   name: Build project
                   command: yarn build
+workflows:
+    build-and-test:
+        jobs:
+            - production
+      
