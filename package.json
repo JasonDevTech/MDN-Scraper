@@ -1,11 +1,11 @@
 {
     "name": "mdn-scraper",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Query the MDN website with a search term.",
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "files": [
-        "./dist/"
+        "dist/"
     ],
     "repository": {
         "type": "git",
