@@ -41,6 +41,12 @@
         "prettier": "prettier --write .",
         "commit": "cz"
     },
+    "lint-staged": {
+        "**/*.ts": [
+            "yarn eslint",
+            "yarn prettier"
+        ]
+    },
     "dependencies": {
         "axios": "^0.21.1",
         "html-entities": "^2.3.2",
@@ -64,6 +70,7 @@
         "eslint-plugin-prettier": "^3.4.0",
         "husky": "^7.0.1",
         "jest": "^27.0.6",
+        "lint-staged": "^11.1.2",
         "prettier": "^2.3.2",
         "ts-node": "^10.1.0",
         "typescript": "^4.3.5"
