@@ -48,7 +48,7 @@
         ]
     },
     "dependencies": {
-        "axios": "^0.23.0",
+        "axios": "^0.24.0",
         "html-entities": "^2.3.2",
         "match-sorter": "^6.3.0",
         "node-html-parser": "^5.0.0"
